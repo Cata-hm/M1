@@ -95,9 +95,9 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos = crearCadena.bind(this , "*" , "*");
-let textoGuiones = crearCadena.bind(this , "-" , "-");
-let textoUnderscore = crearCadena.bind(this , "_" , "_");
+let textoAsteriscos = crearCadena.bind(null, "*", "*"); //esto lo que hace es pasarle los textos fijos, hace una closure, se pone null primero porque el primer parámetro del bind es this pero como no hay this en esta función se pone null.
+let textoGuiones = crearCadena.bind(null, "-", "-");
+let textoUnderscore = crearCadena.bind(null, "_", "_");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
