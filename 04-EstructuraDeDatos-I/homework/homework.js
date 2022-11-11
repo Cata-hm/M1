@@ -38,24 +38,19 @@ Pueden utilizar class o función constructora.
 function Queue() {
   this.arr = [];
   
-  Queue.prototype.enqueue = function(value){
-    this.arr.push(value);
-  }
-
-  Queue.prototype.dequeue = function() {
-    if(this.arr.length === 0) 
-    //revisa si el array está vacio
-    return undefined; 
-    // y si está vacio retorna undefined
-
-    return this.arr.shift();
-    //sino está vacio entonces shift regresa el elemento q saco del array
-    return firstArr;
-  }
-
   Queue.prototype.size = function(){
     return this.arr.length;
-  }
+  };
+
+  Queue.prototype.enqueue = function(value){
+    this.arr.push(value);
+  };
+
+  Queue.prototype.dequeue = function() {
+    if(this.arr.length) //revisa si el array está vacio
+    return undefined; // y si está vacio retorna undefined
+    return this.arr.shift(); //sino está vacio entonces shift regresa el elemento q saco del array, finalmente se podrían eliminar las lineas 50, 51 y 52 y funcionaría igual
+  };
 }
 
 // No modifiquen nada debajo de esta linea
