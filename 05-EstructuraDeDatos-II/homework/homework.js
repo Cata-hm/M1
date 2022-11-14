@@ -13,7 +13,7 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
 
 function LinkedList() {
   this.head = null; //Es la propiedad que almacenará unicamente objetos
-  this._length = 0
+  this.size = 0;
 }
 
 function Node(value) {
@@ -25,55 +25,65 @@ LinkedList.prototype.add = function (value) {
   const newNode = new Node(value); 
   let current = this.head;
 
-  if (current === null) {
+  //La lista estaba vacía, insertamos el nodo en HEAD, aumentamos el size.
+  if (!current) {
       this.head = newNode;
-      this._length++;
+      this.size++;
       return value;
   }
 
-  while(current.next !== null){
-      return current.next;
-  }
+  //La lista no estaba vacía, debe recorrer hasta el final de la lista e insertar
+  
+  while(current.next)current = current.next;
+
   current.next = newNode;
-  this._length++;
+  this.size++;
   return value;
 }
 //-------------------------------------------
 LinkedList.prototype.remove = function (value) {
+  let current = this.head;
+  
   // Devuelve null cuando intentamos eliminar un valor de un nodo en un una lista vacía
-  if(!this.head){
-    return null;
-  }
-  // if only one node in the list
-  if(!this.head.next){
+  if(!current) return null;
+  
+  // Si la lista tiene un solo nodo
+  if(!current.next){
+    const aux = this.head.value;
     this.head = null;
-    return;
+    this.size++;
+    return aux;
   }
-  let previous = this.head;
-  let tail = this.head.next;
-
-  while(tail.next !== null){
-    previous = tail;
-    tail = tail.next;
+  
+  //No está vacía, y no tiene un solo nodo
+  while(current.next.next){
+    current = current.next;
   }
 
-  previous.next = null;
-  return this.head;
+  const aux = current.next.value;
+  this.size++;
+  current.next = null;
+  return aux;
 }
 //-------------------------------------------
-LinkedList.prototype.search = function (value) {
-  if (this.head === null) {
-    return null;
-  }
-  else {
-    let currentNode = this.head;
-    while(currentNode) {
-        if(currentNode.value === value) {
-        return currentNode;
-        }
-        currentNode = currentNode.next;
+LinkedList.prototype.search = function (arg) {
+  let current = this.head;
+
+  while(current) {
+    //Si el argumento es una función
+    if (typeof arg === "function") {
+      if (arg(current.value)) {
+        return current.value;
+      } 
+    } else {
+      //Si el argumento es un valor
+      if (current.value === arg) {
+        return current.value;
+      }
     }
+    current = current.next;
   }
+  return null;
 }
 
 /*
@@ -96,6 +106,7 @@ function HashTable() {
   this.numBuckets = 35;
 }
 
+// Realizamos un acumulador
 HashTable.prototype.hash = function (key) {
     let suma = 0;
     for (let i = 0; i < key.length; i++) {
@@ -104,15 +115,17 @@ HashTable.prototype.hash = function (key) {
     return suma % this.numBuckets;
 }
 
+//Guardar un objeto con clave y valor
 HashTable.prototype.set = function (key, value) {
     if (typeof key !== "string") {
+      //throw es como un return pero de errores, arroja errores y en este caso dice que los keys deben ser strings
         throw new TypeError ("Keys must be strings")
     } else {
         var index = this.hash(key);
-        if(this.buckets[index] === undefined) {
+        if(this.buckets[index] === undefined) {//Si el bucket está vacío o undefined
             this.buckets[index] = {};
         }
-        this.buckets[index][key] = value;
+        this.buckets[index][key] = value; //Le decimos que le añada estas caracteristicas de index y key
     }
 }
 
