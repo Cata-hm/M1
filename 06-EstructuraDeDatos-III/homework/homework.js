@@ -72,6 +72,7 @@ function BinarySearchTree(value) {
         this.right.depthFirstForEach(cb, order);
       }
     }
+    // no funciona no se porque?
     else if(order === "in-order" || undefined) { //recorre el arbol si el orden es tipo pre order (LEFT - THIS.VALUE (root) - RIGHT)
       if(this.left) {
         this.left.depthFirstForEach(cb, order);
