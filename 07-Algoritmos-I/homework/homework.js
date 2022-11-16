@@ -118,7 +118,10 @@ function selectionSort(array) {
   // el array recibido como parámetro utilizando dos arreglos
   // Devolver el array ordenado resultante
   //ejemplo:
-  // [ 3, 4, 1, 5, 2]
+  // [  3,  4,  1,  5,  2]
+  // [  i,i+1,  -,  -,  -]
+  // [  j,j+1,  -,  -,  -]
+  // min = valor en i    ...este funciona como un auxiliar.  
   // Tu código:
   for (let i = 0; i < array.length -1; i++) { // recorre todo el array menos el ultimo porque al final será el mayor y no tiene sentido
     var min = i; // inicio suponiendo que el valor minimo es el primer nro del array
