@@ -38,12 +38,14 @@ function BinarySearchTree(value) {
         this.left = new BinarySearchTree(value); //crea un nuevo nodo e ingresa el valor a la izquierda
       } else { // además
         this.left.insert(value); //que si el siguiente nodo está ocupado pase al siguiente
+        return value;
       }
     } else { //además
         if(!this.right) { //si el valor a ingresar es mayor que el del nodo
           this.right = new BinarySearchTree(value); //crea un nuevo nodo e ingresa el valor a la derecha
         } else { // además
           this.right.insert(value); //que si el siguiente nodo está ocupado pase al siguiente
+          return value;
         }
       }
   };
