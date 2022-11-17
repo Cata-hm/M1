@@ -56,4 +56,52 @@ function merge(left, right) {
     }
     return [...arr, ...left, ...right]
   }
+  //------------------------------------------------
+  // HOMEWORK REVIEW
+  //quick sort
+  function quickSort(array) {
+    let pivot = array[0];
+    let left = [];
+    let right = [];
+    let middle= [];
+
+    for (let i = 0; i < array.length; i++){
+      array[i] < pivot && left.push(array[i]); // si el array es menor al pivote y al de la izquierda pusheo el array.
+      array[i] > pivot && right.push(array[i]); // si el array es mayor al pivote y al de la derecha pusheo el array.
+      array[i] === pivot && middle.push(array[i]); // si el array es igual al pivote y al de la mitad pusheo el array.
+    }
+    return quickSort(left).concat(middle).concat(quickSort(right));
+  }
+
+  //merge sort
+  function mergeSort(array) {
+    if(array.length <= 1) return array; // si el array es menor o igual a 1 retorna array.
+
+    const middleIndex = Math.floor(array.length / 2);
+    const left = array.slice(0, middle);
+    const right = array.slice(middleIndex);
+
+    merge(mergeSort(left),mergeSort(right)) // sino, acá junto los array izquierdos y derechos ordenados
+  }
+  function merge(left,right){
+    let array = [];
+
+    let leftIndex = 0;
+    let rightIndex = 0;
+
+    while (leftIndex < left.length && rightIndex < right.length) { //Si el indice izquierdo y el derecho son menores  a la longitud se hace lo siguiente
+      if(left[leftIndex]<right[rightIndex]) { //acá comparo si el nro en la posición 0 del array izq es menor q el nro en la posicion 0 del array derecho
+        array.push(left[leftIndex]);
+        leftIndex++;
+      } else {
+        array.push(right[rightIndex]); //sino pusheo right
+        rightIndex++;
+      }
+    }
+    return array.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+  }
+  //------------------------------------------------
+
+
+
   
